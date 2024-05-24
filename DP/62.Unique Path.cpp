@@ -27,16 +27,3 @@ public:
         return (int)out;
     }
 };
-
-int main(){
-
-    int x,y,ans;
-    Solution fun;
-    
-    cin >> x >> y;
-
-    ans = fun.uniquePaths(x,y);
-
-    cout << ans << endl;
-    return 0;
-}
