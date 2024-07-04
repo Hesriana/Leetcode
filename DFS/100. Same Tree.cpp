@@ -12,26 +12,35 @@
 
 class Solution {
 public:
-    vector<int> inorderTraversal(TreeNode* root) {
-        
-        if(!root)
-            return vector<int>{};
-        
-        vector<int> inorder;
-        stack<TreeNode*> s;
-        TreeNode* temp = root;
-
-        while(temp != nullptr || !s.empty()){
-            while(temp){
-                s.push(temp);
-                temp = temp->left;
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        stack<TreeNode*> s1,s2;
+        TreeNode* proot = p;
+        TreeNode* qroot = q;
+        while(!s1.empty()) s1.pop();
+        while(!s2.empty()) s2.pop();
+//dfs
+        while(proot != nullptr || !s1.empty() || qroot!=nullptr || !s2.empty()){
+            while(proot || qroot){
+                s1.push(proot);
+                s2.push(qroot);
+                if(proot == nullptr && qroot != nullptr)
+                    return false;
+                else if(qroot == nullptr && proot != nullptr)
+                    return false;
+                else if(proot->val != qroot->val)
+                    return false;
+                proot = proot->left;
+                qroot = qroot->left;
             }
-            temp = s.top();
-            s.pop();
-            inorder.push_back(temp->val);
-            temp = temp->right;
+
+            proot = s1.top();
+            s1.pop();
+            qroot = s2.top();
+            s2.pop();
+            proot = proot->right;
+            qroot = qroot->right;
         }
 
-        return inorder;
+        return true;
     }
 };
