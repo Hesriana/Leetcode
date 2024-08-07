@@ -1,3 +1,4 @@
+//難點在要確定甚麼時候要加空白甚麼時候不用加
 class Solution {
 public:
     string numberToWords(int num) {
