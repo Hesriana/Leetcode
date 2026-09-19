@@ -2,6 +2,28 @@ class Solution {
 public:
     vector<int> dailyTemperatures(vector<int>& temperatures) {
         
+        stack<int> st;
+        vector<int> answer(temperatures.size());
+
+        for(int i = 0 ; i < temperatures.size() ; i++){
+
+            while(!st.empty() && temperatures[st.top()] < temperatures[i]){
+                answer[st.top()] = i - st.top();
+                st.pop();
+            }
+            
+
+            st.push(i);
+        }
+
+        return answer;
+    }
+};
+/*
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        
         vector<int> ans = vector<int>(temperatures.size(),0);//預設全部為0
         stack<int> s;
         int i = 0;
@@ -27,4 +49,4 @@ public:
 
         return ans;
     }
-};
+};*/
